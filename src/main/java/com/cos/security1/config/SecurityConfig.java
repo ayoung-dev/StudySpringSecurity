@@ -24,13 +24,15 @@ public class SecurityConfig {
             http
                     .csrf(csrf -> csrf.disable())
                     .authorizeHttpRequests(auth -> auth
-                            .requestMatchers("/user/**").authenticated()
+                            .requestMatchers("/user/**").authenticated()    // 인증만 되면 들어갈 수 있음
                             .requestMatchers("/manager/**").hasAnyRole("ADMIN", "MANAGER")
                             .requestMatchers("/admin/**").hasRole("ADMIN")
                             .anyRequest().permitAll()
                     )
                     .formLogin(form -> form
                             .loginPage("/loginForm")
+                            .loginProcessingUrl("/login")   // /login 주소가 호출이 되면 security가 낚아채서 대신 로그인 진행 -> controller에 /login 만들지 않아도 됨
+                            .defaultSuccessUrl("/")
                             .permitAll()
                     );
 
