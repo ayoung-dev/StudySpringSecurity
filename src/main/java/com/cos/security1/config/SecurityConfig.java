@@ -6,14 +6,13 @@ package com.cos.security1.config;
 // 4-1. 정보를 토대로 회원가입 자동으로 진행
 // 4-2. 추가 정보 받은 창으로 이동
 
-import com.cos.security1.config.auth.PrincipalOauth2UserService;
+import com.cos.security1.config.oauth.PrincipalOauth2UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -24,11 +23,11 @@ public class SecurityConfig {
     @Autowired
     private PrincipalOauth2UserService principalOauth2UserService;
 
-    // 해당 메서드의 리턴 오브젝트를 IoC로 등록
-    @Bean
-    public BCryptPasswordEncoder encodePwd() {
-        return new BCryptPasswordEncoder();
-    }
+//    // 해당 메서드의 리턴 오브젝트를 IoC로 등록
+//    @Bean
+//    public BCryptPasswordEncoder encodePwd() {
+//        return new BCryptPasswordEncoder();
+//    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
